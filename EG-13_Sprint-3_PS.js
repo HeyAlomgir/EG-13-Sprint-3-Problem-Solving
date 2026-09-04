@@ -145,3 +145,34 @@ const subarraySum = function(nums, k) {
 };
  
 // console.log("07:", subarraySum([1, 1, 1], 2)); 
+
+
+
+
+
+//  08. Top K Frequent Elements
+
+
+
+const topKFrequent = function(nums, k) {
+    const freq = new Map();
+    for (const n of nums) {
+        freq.set(n, (freq.get(n) || 0) + 1);
+    }
+ 
+    const buckets = new Array(nums.length + 1).fill(null).map(() => []);
+    for (const [num, count] of freq.entries()) {
+        buckets[count].push(num);
+    }
+ 
+    const res = [];
+    for (let i = buckets.length - 1; i >= 0 && res.length < k; i--) {
+        for (const num of buckets[i]) {
+            res.push(num);
+            if (res.length === k) break;
+        }
+    }
+    return res;
+};
+ 
+// console.log("08:", topKFrequent([1, 1, 1, 2, 2, 3], 2));
