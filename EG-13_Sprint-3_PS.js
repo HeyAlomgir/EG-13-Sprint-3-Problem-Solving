@@ -123,3 +123,25 @@ const threeSum = function (nums) {
 };
 
 // console.log("06:", threeSum([-1, 0, 1, 2, -1, -4]));
+
+
+//  07. Subarray Sum Equals K
+
+const subarraySum = function(nums, k) {
+    const prefixCounts = new Map();
+    prefixCounts.set(0, 1);
+    let sum = 0;
+    let count = 0;
+ 
+    for (const n of nums) {
+        sum += n;
+        const needed = sum - k;
+        if (prefixCounts.has(needed)) {
+            count += prefixCounts.get(needed);
+        }
+        prefixCounts.set(sum, (prefixCounts.get(sum) || 0) + 1);
+    }
+    return count;
+};
+ 
+// console.log("07:", subarraySum([1, 1, 1], 2)); 
