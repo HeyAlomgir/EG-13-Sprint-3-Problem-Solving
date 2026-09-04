@@ -75,7 +75,7 @@ const canConstruct = function (ransomNote, magazine) {
 
 // 05. Majority Element
 
-const majorityElement = function(nums) {
+const majorityElement = function (nums) {
     let count = 0;
     let candidate = null;
     for (const n of nums) {
@@ -86,6 +86,40 @@ const majorityElement = function(nums) {
     }
     return candidate;
 };
- 
+
 // console.log("05:", majorityElement([2, 2, 1, 1, 1, 2, 2]));
 
+
+
+
+// 3Sum
+
+
+const threeSum = function (nums) {
+    const res = [];
+    const sorted = [...nums].sort((a, b) => a - b);
+    const n = sorted.length;
+
+    for (let i = 0; i < n - 2; i++) {
+        if (i > 0 && sorted[i] === sorted[i - 1]) continue;
+        let left = i + 1;
+        let right = n - 1;
+        while (left < right) {
+            const sum = sorted[i] + sorted[left] + sorted[right];
+            if (sum === 0) {
+                res.push([sorted[i], sorted[left], sorted[right]]);
+                while (left < right && sorted[left] === sorted[left + 1]) left++;
+                while (left < right && sorted[right] === sorted[right - 1]) right--;
+                left++;
+                right--;
+            } else if (sum < 0) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+    }
+    return res;
+};
+
+// console.log("06:", threeSum([-1, 0, 1, 2, -1, -4]));
