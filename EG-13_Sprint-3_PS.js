@@ -31,3 +31,21 @@ const moveZeroes = function (nums) {
 // moveZeroes(arr02);
 // console.log("02:", arr02); 
 
+
+
+// 03. Valid Anagram
+
+const isAnagram = function (s, t) {
+    if (s.length !== t.length) return false;
+    const counts = {};
+    for (const ch of s) {
+        counts[ch] = (counts[ch] || 0) + 1;
+    }
+    for (const ch of t) {
+        if (!counts[ch]) return false;
+        counts[ch]--;
+    }
+    return true;
+};
+
+// console.log("03:", isAnagram("anagram", "nagaram"))
