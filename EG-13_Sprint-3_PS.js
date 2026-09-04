@@ -49,3 +49,23 @@ const isAnagram = function (s, t) {
 };
 
 // console.log("03:", isAnagram("anagram", "nagaram"))
+
+
+
+
+
+// 04. Ransom Note
+
+const canConstruct = function (ransomNote, magazine) {
+    const counts = {};
+    for (const ch of magazine) {
+        counts[ch] = (counts[ch] || 0) + 1;
+    }
+    for (const ch of ransomNote) {
+        if (!counts[ch]) return false;
+        counts[ch]--;
+    }
+    return true;
+};
+
+// console.log("04:", canConstruct("aa", "aab"));
