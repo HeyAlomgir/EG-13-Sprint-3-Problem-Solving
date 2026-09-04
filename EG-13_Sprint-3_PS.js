@@ -127,12 +127,12 @@ const threeSum = function (nums) {
 
 //  07. Subarray Sum Equals K
 
-const subarraySum = function(nums, k) {
+const subarraySum = function (nums, k) {
     const prefixCounts = new Map();
     prefixCounts.set(0, 1);
     let sum = 0;
     let count = 0;
- 
+
     for (const n of nums) {
         sum += n;
         const needed = sum - k;
@@ -143,7 +143,7 @@ const subarraySum = function(nums, k) {
     }
     return count;
 };
- 
+
 // console.log("07:", subarraySum([1, 1, 1], 2)); 
 
 
@@ -154,17 +154,17 @@ const subarraySum = function(nums, k) {
 
 
 
-const topKFrequent = function(nums, k) {
+const topKFrequent = function (nums, k) {
     const freq = new Map();
     for (const n of nums) {
         freq.set(n, (freq.get(n) || 0) + 1);
     }
- 
+
     const buckets = new Array(nums.length + 1).fill(null).map(() => []);
     for (const [num, count] of freq.entries()) {
         buckets[count].push(num);
     }
- 
+
     const res = [];
     for (let i = buckets.length - 1; i >= 0 && res.length < k; i--) {
         for (const num of buckets[i]) {
@@ -174,5 +174,29 @@ const topKFrequent = function(nums, k) {
     }
     return res;
 };
- 
+
 // console.log("08:", topKFrequent([1, 1, 1, 2, 2, 3], 2));
+
+
+
+// 09. Longest Consecutive Sequence
+
+const longestConsecutive = function (nums) {
+    const numSet = new Set(nums);
+    let longest = 0;
+
+    for (const n of numSet) {
+        if (!numSet.has(n - 1)) {
+            let length = 1;
+            let current = n;
+            while (numSet.has(current + 1)) {
+                current++;
+                length++;
+            }
+            longest = Math.max(longest, length);
+        }
+    }
+    return longest;
+};
+
+console.log("09:", longestConsecutive([100, 4, 200, 1, 3, 2]));
